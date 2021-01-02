@@ -1,0 +1,28 @@
+
+We want a retro computer/hacker look:
+Preferrably, we don't want real art assets, but instead use fonts.
+However, we also want to render the snake in a square grid.
+
+The aesthetics we're looking for is:
+https://github.com/Swordfish90/cool-retro-term
+several effects have been layered on:
+Seems to use GL_ES shader effects.
+
+
+Netscape cybermind also has cool aesthetics
+
+
+SDL_ttf loads ttf fonts quite easily. We can also draw anywhere we want.
+http://www.sdltutorials.com/sdl-ttf
+It's doint texture loading, so may be less efficient than we want:
+https://github.com/grimfang4/SDL_FontCache
+??? can we add the effects required?
+
+
+Effects:
+Lager text formed by smaller text typing in incorrect (not on grid) locations
+
+
+
+SDL tutorial
+http://lazyfoo.net/tutorials/SDL/index.phphttps://lazyfoo.net/tutorials/SDL/index.php

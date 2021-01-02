@@ -1,0 +1,2 @@
+emcc compile option -O2
+affects how assets are included.
