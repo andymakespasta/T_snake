@@ -187,7 +187,7 @@ var Module = typeof Module !== 'undefined' ? Module : {};
     }
   
    }
-   loadPackage({"files": [{"filename": "/assets/Terminess_Mono.ttf", "start": 0, "end": 848728, "audio": 0}, {"filename": "/assets/FreeSans.ttf", "start": 848728, "end": 1102508, "audio": 0}], "remote_package_size": 1102508, "package_uuid": "4061dcee-27d3-4ee3-8ff4-f6b71d7a2723"});
+   loadPackage({"files": [{"filename": "/assets/Terminess_Mono.ttf", "start": 0, "end": 848728, "audio": 0}, {"filename": "/assets/FreeSans.ttf", "start": 848728, "end": 1102508, "audio": 0}], "remote_package_size": 1102508, "package_uuid": "34d80ed7-2204-4523-b56f-e2bceb361e99"});
   
   })();
   

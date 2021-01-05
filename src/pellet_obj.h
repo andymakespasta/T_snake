@@ -11,5 +11,7 @@ struct Pellet {
 void render_drawobj_pellet(const struct Pellet * pellet);
 void engine_tickobj_pellet(struct Pellet * pellet);
 
+void pellet_refresh_random(struct Pellet * pellet);
+
 struct Pellet * create_default_pellet();
 #endif

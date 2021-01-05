@@ -30,18 +30,20 @@ void render_drawobj_pellet(const struct Pellet * pellet){
 void engine_tickobj_pellet(struct Pellet * pellet){
 	pellet->ticks_till_expire -= 1;
 	if (pellet->ticks_till_expire <= 0){
-		pellet->pos.x = rand() % MAX_HOR_BLOCKS ;
-		pellet->pos.y = rand() % MAX_VER_BLOCKS ;
-		pellet->ticks_till_expire = DEFAULT_TICKS_TILL_EXPIRE;
+		pellet_refresh_random(pellet);
 		printf("expired\n");
 	}
 }
 
-struct Pellet * create_default_pellet(){
-	struct Pellet * pellet = malloc(sizeof(struct Pellet));
+void pellet_refresh_random(struct Pellet * pellet){
 	pellet->pos.x = rand() % MAX_HOR_BLOCKS ;
 	pellet->pos.y = rand() % MAX_VER_BLOCKS ;
 	pellet->ticks_till_expire = DEFAULT_TICKS_TILL_EXPIRE;
+}
+
+struct Pellet * create_default_pellet(){
+	struct Pellet * pellet = malloc(sizeof(struct Pellet));
+	pellet_refresh_random(pellet);
 	return pellet;
 }
 

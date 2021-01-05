@@ -1,6 +1,7 @@
 #include "gamestate.h"
 #include "display.h"
 #include "snake_obj.h"
+#include "pellet_obj.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -27,25 +28,35 @@ void engine_tickobj_snake(struct Snake * snake){
 		switch(snake->direction){
 			case UP:
 				next.y = snake->body[0].y - 1;
-				if (next.y < 0){ next.y = MAX_VER_BLOCKS; }
+				if (next.y < 0){ next.y = MAX_VER_BLOCKS-1; }
 				break;
 			case DOWN:
 				next.y = snake->body[0].y + 1;
-				if (next.y > MAX_VER_BLOCKS){ next.y = 0; }
+				if (next.y >= MAX_VER_BLOCKS){ next.y = 0; }
 				break;
 			case LEFT:
 				next.x = snake->body[0].x - 1;
-				if (next.x < 0){ next.x = MAX_HOR_BLOCKS; }
+				if (next.x < 0){ next.x = MAX_HOR_BLOCKS-1; }
 				break;
 			case RIGHT:
 				next.x = snake->body[0].x + 1;
-				if (next.x > MAX_HOR_BLOCKS){ next.x = 0; }
+				if (next.x >= MAX_HOR_BLOCKS){ next.x = 0; }
 				break;
 		}
 
 		// TODO: check collision
+		if (next.x == engine_gamestate.pellet->pos.x &&
+			next.y == engine_gamestate.pellet->pos.y ){
+			snake->length += 1;
+			for (int i=(snake->length)-1;i>0;i--){
+				snake->body[i] = snake->body[i-1];
+			}
+			snake->body[0] = next;
+			pellet_refresh_random(engine_gamestate.pellet);
+			return;
+		}
 
-		// update snake body
+		// update snake body on no collision
 		for (int i=(snake->length)-1;i>0;i--){
 			snake->body[i] = snake->body[i-1];
 		}
@@ -53,6 +64,8 @@ void engine_tickobj_snake(struct Snake * snake){
 	}
 }
 
+//TODO: instead of turned_this_move, make it next_direction, that can be overwritten.
+// so that commands can be slightly "queued"
 void snake_turn(struct Snake * snake, enum Direction direction){
 	if(snake == NULL) return;
 	if(snake->turned_this_move) return;
@@ -78,7 +91,7 @@ void snake_turn(struct Snake * snake, enum Direction direction){
 struct Snake * create_default_snake(){
 	struct Snake * snake = malloc(sizeof(struct Snake));
 	snake->direction = RIGHT;
-	snake->ticks_per_move = 10;
+	snake->ticks_per_move = 8;
 	snake->ticks_till_move = 0;
 
 	snake->length = 5;
