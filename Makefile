@@ -1,8 +1,8 @@
 NAME=T_snake
 
 
-SOURCES = src/main.c src/display.c
-INCLUDES = src/display.h
+SOURCES = src/main.c src/display.c src/engine.c src/snake_obj.c
+INCLUDES = src/display.h src/gamestate.h src/engine.h src/snake_obj.h
 ASSETS = assets/FreeSans.ttf assets/Terminess_Mono.ttf
 
 all: web linux

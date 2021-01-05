@@ -1,0 +1,127 @@
+insall emscripten
+download, unpack.
+
+install libsdl2-dev
+apt-get install libsdl2-dev
+
+Built using emcc
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.11
+clang version 12.0.0 (/b/s/w/ir/cache/git/chromium.googlesource.com-external-github.com-llvm-llvm--project f4c8b80318005ca61bfed9b40ee9e6039194159b)
+Target: x86_64-unknown-linux-gnu
+
+
+
+
+
+https://github.com/nmrugg/stockfish.js
+embedded webassembly example
+
+
+================ webassembly / C =====================
+ncurses pdcurses have almost the same definitions, target different architetures.
+Both extended from spec, to uncompatible
+
+2 Xcurses + emscripten projects look promising:
+emcurses: 
+	requires installing emscripten
+
+
+curses.js
+
+
+
+
+
+
+================ curses stuff ====================
+functions we know work in demos:
+compiling on linux requries linking -lcurses / -lncurses
+
+Curses.js
+#include <stdio.h>
+#include <signal.h>
+#include <curses.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <time.h>
+
+#ifdef XCURSES
+    Xinitscr(argc, argv);
+#else
+    initscr();
+#endif
+    nodelay(stdscr, TRUE);
+    noecho();
+
+
+attrset(COLOR_PAIR(rand() % 8) | bold);
+mvaddstr(row - 2, col, " # # ");
+napms(DELAYSIZE);
+move(LINES - 1, COLS - 1);
+refresh();
+
+
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <curses.h>
+#include <signal.h>
+#include <pwd.h>
+#include <fcntl.h>
+#include <stdbool.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <term.h>
+#include <time.h>
+
+#define HEIGHT	22
+#define WIDTH	80
+
+==============================
+
+
+
+temporal superposition / decoherence.
+waveform collapse.
+
+
+
+potential time stuff: 
+	walk into a point -> jump back X ticks.
+		(optional) jump has animation during which inputs blocked.
+		(optional) after jump, shows future path of snake that jumped.
+		show message "temporal superposition COMPLETE"
+		show message "WARNING: temporal superposition unstable."
+		your past killing you (ex bumping into body of past) -> you die! no problems.
+		your past being killed / altered (cutting across your past / others cutting across your past) -> jump back to present, as if no time travel happened.
+			show message "paradox detected. waveform collapse imminent."
+			animation, everything scrambled, then reverting to frame before jump.
+			show message "temporal superposition COMPLETE" -> scramble -> "FAILED"
+		Reaching the present removes the warning message.
+		implemntation:
+			walk into a point -> set target time, start rewind animation
+				rewind animation plays ticks backwards. (redrawing everything)
+				Create ghost blocks on path snake passes over.
+				next tick is still counting up, as timeline may revert.
+				when you kill your past, load state back to before jump, wipe everything that happened.
+				If you reach the present, overwrite timeline.
+
+	hold a button (potentially consume energy)
+
+
+	playback after a room is cleared:
+		requires entire timeline saved.
+
+
+
+
+
+normal tick:
+	check inputs
+	if only normal movement (direction / speed changes)
+		update anything that may move.
+		if move, redraw.
+		add tick.
+	if 
+
