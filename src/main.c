@@ -26,11 +26,11 @@ void main_loop()
 
 #if __EMSCRIPTEN__
     // fps: -1: negative for request animation frame frequency; infinite: 1:
-    emscripten_set_main_loop(engine_tick, -1, 1);
+    emscripten_set_main_loop(engine_loop, -1, 1);
 #else
     while (enginestate != QUIT)
     {
-        engine_tick();
+        engine_loop();
     }
 #endif
 }

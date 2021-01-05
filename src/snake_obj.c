@@ -78,7 +78,7 @@ void snake_turn(struct Snake * snake, enum Direction direction){
 struct Snake * create_default_snake(){
 	struct Snake * snake = malloc(sizeof(struct Snake));
 	snake->direction = RIGHT;
-	snake->ticks_per_move = 2;
+	snake->ticks_per_move = 10;
 	snake->ticks_till_move = 0;
 
 	snake->length = 5;

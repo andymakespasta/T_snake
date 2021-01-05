@@ -19,7 +19,7 @@ void engine_close();
 
 // Call this in a loop as often as possible.
 // The engine will handle everything from there on.
-void engine_tick();
+void engine_loop();
 
 // Methods of interacting with gamestate.
 // void add_active_object(void* object);

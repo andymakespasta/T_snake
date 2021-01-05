@@ -9,6 +9,10 @@
 
 enum Enginestate enginestate;
 struct Gamestate engine_gamestate;
+unsigned int last_loop_time;
+
+#define MS_PER_TICK 15
+// this means 66 ticks per second
 
 
 void check_inputs() {
@@ -49,6 +53,7 @@ void engine_init() {
     SDL_Init(0);
     display_init();
     enginestate = RUNNING_GAME; // TODO: implement menu selection state etc.
+    last_loop_time = SDL_GetTicks();
 }
 
 void engine_close() {	
@@ -57,14 +62,22 @@ void engine_close() {
 }
 
 void engine_tick() {
-
 	check_inputs(); //sets gamestate / actor state
 
 	engine_tickobj_snake(engine_gamestate.snake);
-	engine_tickobj_pellet(engine_gamestate.pellet);
+	engine_tickobj_pellet(engine_gamestate.pellet);	
+}
 
-    display_draw_gamestate();
-    
+void engine_loop() {
+
+	unsigned int current_time = SDL_GetTicks();
+
+	while (last_loop_time < current_time){
+		last_loop_time += MS_PER_TICK;
+		engine_tick();	
+	}
+	display_draw_gamestate();
+
     // unsigned int ticks = SDL_GetTicks();
     // printf("%u\n", ticks);
 	// check_inputs(); //sets gamestate / actor state
