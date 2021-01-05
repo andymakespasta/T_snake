@@ -30,6 +30,8 @@ struct GameObject {
 };
 
 struct Gamestate {
+	struct Pellet* pellet;
+
 	int current_tick; //TODO: overflow
 	// int active_objects
 	// struct GameObject active_object[MAX_ACTIVE_OBJECTS];

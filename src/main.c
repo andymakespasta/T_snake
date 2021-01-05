@@ -2,6 +2,7 @@
 #include "gamestate.h"
 #include "engine.h"
 #include "snake_obj.h"
+#include "pellet_obj.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +17,7 @@
 void test_setup() {
     //test block
     engine_gamestate.snake = create_default_snake();
+    engine_gamestate.pellet = create_default_pellet();
     //end test block   
 }
 

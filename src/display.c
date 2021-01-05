@@ -2,6 +2,7 @@
 #include "gamestate.h"
 
 #include "snake_obj.h"
+#include "pellet_obj.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -91,6 +92,7 @@ void display_draw_gamestate(){
 
     // engine_gamestate 
     render_drawobj_snake(engine_gamestate.snake, t_white_c);
+    render_drawobj_pellet(engine_gamestate.pellet);
 
     SDL_RenderPresent(renderer);
 

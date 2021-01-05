@@ -5,6 +5,7 @@
 
 // list of objects
 #include "snake_obj.h"
+#include "pellet_obj.h"
 
 enum Enginestate enginestate;
 struct Gamestate engine_gamestate;
@@ -60,7 +61,10 @@ void engine_tick() {
 	check_inputs(); //sets gamestate / actor state
 
 	engine_tickobj_snake(engine_gamestate.snake);
+	engine_tickobj_pellet(engine_gamestate.pellet);
+
     display_draw_gamestate();
+    
     // unsigned int ticks = SDL_GetTicks();
     // printf("%u\n", ticks);
 	// check_inputs(); //sets gamestate / actor state

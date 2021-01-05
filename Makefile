@@ -1,8 +1,8 @@
 NAME=T_snake
 
 
-SOURCES = src/main.c src/display.c src/engine.c src/snake_obj.c
-INCLUDES = src/display.h src/gamestate.h src/engine.h src/snake_obj.h
+SOURCES = src/main.c src/display.c src/engine.c src/snake_obj.c src/pellet_obj.c
+INCLUDES = src/display.h src/gamestate.h src/engine.h src/snake_obj.h src/pellet_obj.h
 ASSETS = assets/FreeSans.ttf assets/Terminess_Mono.ttf
 
 all: web linux
@@ -13,6 +13,7 @@ BROWSER = firefox
 EMRUM = emrun --browser $(BROWSER)
 EMCC_FLAGS += -s WASM=1
 EMCC_FLAGS += -s USE_SDL=2 -s USE_SDL_TTF=2
+EMCC_FLAGS += -s TOTAL_MEMORY=67108864
 EMCC_FLAGS += --emrun
 EMCC_FLAGS += --preload-file assets
 # EMCC_FLAGS += -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'

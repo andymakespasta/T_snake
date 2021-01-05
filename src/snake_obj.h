@@ -22,9 +22,9 @@ struct Snake {
 };
 
 void render_drawobj_snake(const struct Snake * snake, const SDL_Color color);
-
 void engine_tickobj_snake(struct Snake * snake);
 
+// actions on object
 void snake_turn(struct Snake * snake, enum Direction direction);
 
 struct Snake * create_default_snake();
