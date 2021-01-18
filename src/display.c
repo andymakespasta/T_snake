@@ -91,12 +91,23 @@ void display_draw_gamestate(){
 //testing block end
 
     // engine_gamestate 
-    render_drawobj_snake(engine_gamestate.snake, t_white_c);
+    // render_drawobj_snake(engine_gamestate.snake, t_white_c);
+    SDL_Color color = {0xff, 0xff, 0xff, 0x00};
+    render_drawobj_snake(engine_gamestate.snake, color);
     render_drawobj_pellet(engine_gamestate.pellet);
 
     SDL_RenderPresent(renderer);
 
     SDL_UpdateWindowSurface(window);
+}
+
+void display_draw_snapshot(const struct Snapshot* snapshot) {
+    SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0xFF );
+    SDL_RenderClear(renderer);
+
+    SDL_Color color = {0xff, 0xff, 0xff, 0x00};
+    render_drawobj_snake(snapshot->snake, color);
+    render_drawobj_pellet(snapshot->pellet);
 }
 
 

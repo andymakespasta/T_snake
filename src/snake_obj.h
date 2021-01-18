@@ -28,4 +28,5 @@ void engine_tickobj_snake(struct Snake * snake);
 void snake_turn(struct Snake * snake, enum Direction direction);
 
 struct Snake * create_default_snake();
+struct Snake* copy_snake(struct Snake* source_snake);
 #endif

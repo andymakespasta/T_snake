@@ -8,7 +8,8 @@
 
 
 void render_drawobj_snake(const struct Snake * snake, const SDL_Color color){
-	SDL_SetRenderDrawColor( renderer, 0xff, 0xff, 0x00, 0x00 );
+	// SDL_SetRenderDrawColor( renderer, 0xff, 0xff, 0x00, 0x00 );
+	SDL_SetRenderDrawColor( renderer, color.r, color.g, color.b, color.a );
 	SDL_Rect rect;
 	for (int i=0; i<(snake->length); i++){
 		rect = point_to_rect(&snake->body[i]);
@@ -61,6 +62,9 @@ void engine_tickobj_snake(struct Snake * snake){
 			snake->body[i] = snake->body[i-1];
 		}
 		snake->body[0] = next;
+
+		// signal that something changed:
+		engine_gamestate.changed = 1;
 	}
 }
 
@@ -88,7 +92,7 @@ void snake_turn(struct Snake * snake, enum Direction direction){
 	}
 }
 
-struct Snake * create_default_snake(){
+struct Snake* create_default_snake(){
 	struct Snake * snake = malloc(sizeof(struct Snake));
 	snake->direction = RIGHT;
 	snake->ticks_per_move = 8;
@@ -102,6 +106,12 @@ struct Snake * create_default_snake(){
 	snake->body[4] = (struct Point){9,10};
 
 	return snake;
+}
+
+struct Snake* copy_snake(struct Snake* source_snake){
+	struct Snake * new_snake = malloc(sizeof(struct Snake));
+	memcpy(new_snake, source_snake, sizeof(struct Snake));
+	return new_snake;
 }
 
 

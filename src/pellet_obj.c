@@ -47,4 +47,14 @@ struct Pellet * create_default_pellet(){
 	return pellet;
 }
 
+struct Pellet * copy_pellet(struct Pellet * source_pellet){
+	struct Pellet * pellet = malloc(sizeof(struct Pellet));
+	pellet->pos.x = source_pellet->pos.x;
+	pellet->pos.y = source_pellet->pos.y;
+	pellet->ticks_till_expire = source_pellet->ticks_till_expire;
+	return pellet;
+}
+
+
+
 //TODO: reset rand if collision

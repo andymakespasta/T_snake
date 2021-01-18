@@ -28,11 +28,6 @@ emcurses:
 
 curses.js
 
-
-
-
-
-
 ================ curses stuff ====================
 functions we know work in demos:
 compiling on linux requries linking -lcurses / -lncurses
@@ -86,7 +81,6 @@ temporal superposition / decoherence.
 waveform collapse.
 
 
-
 potential time stuff: 
 	walk into a point -> jump back X ticks.
 		(optional) jump has animation during which inputs blocked.
@@ -125,3 +119,8 @@ normal tick:
 		add tick.
 	if 
 
+
+
+=========== settings ===========
+temporal superposition paradox: death / waveform collapse / back to the past
+key bindings

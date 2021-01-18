@@ -14,4 +14,5 @@ void engine_tickobj_pellet(struct Pellet * pellet);
 void pellet_refresh_random(struct Pellet * pellet);
 
 struct Pellet * create_default_pellet();
+struct Pellet * copy_pellet(struct Pellet * source_pellet);
 #endif

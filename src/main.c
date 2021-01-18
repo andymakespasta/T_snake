@@ -16,8 +16,11 @@
 
 void test_setup() {
     //test block
+
     engine_gamestate.snake = create_default_snake();
     engine_gamestate.pellet = create_default_pellet();
+    
+    engine_gamestate.player_snake = engine_gamestate.snake;
     //end test block   
 }
 

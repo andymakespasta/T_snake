@@ -1,8 +1,8 @@
 NAME=T_snake
 
 
-SOURCES = src/main.c src/display.c src/engine.c src/snake_obj.c src/pellet_obj.c
-INCLUDES = src/display.h src/gamestate.h src/engine.h src/snake_obj.h src/pellet_obj.h
+SOURCES = src/main.c src/display.c src/engine.c src/snake_obj.c src/pellet_obj.c src/timeline_manager.c
+INCLUDES = src/display.h src/gamestate.h src/engine.h src/snake_obj.h src/pellet_obj.h src/timeline_manager.h
 ASSETS = assets/FreeSans.ttf assets/Terminess_Mono.ttf
 
 all: web linux
@@ -10,10 +10,13 @@ all: web linux
 # web is based on emscripten.
 EMCC = emcc
 BROWSER = firefox
+# BROWSER = chrome
 EMRUM = emrun --browser $(BROWSER)
 EMCC_FLAGS += -s WASM=1
 EMCC_FLAGS += -s USE_SDL=2 -s USE_SDL_TTF=2
-EMCC_FLAGS += -s TOTAL_MEMORY=67108864
+# EMCC_FLAGS += -s TOTAL_MEMORY=6710886400
+EMCC_FLAGS += -s ALLOW_MEMORY_GROWTH=1
+# EMCC_FLAGS += -s TOTAL_MEMORY=1342177280
 EMCC_FLAGS += --emrun
 EMCC_FLAGS += --preload-file assets
 # EMCC_FLAGS += -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
@@ -57,7 +60,7 @@ output/linux/$(NAME): $(SOURCES) $(INCLUDES)
 
 clean:
 	@echo "attempting to clean"
-	rm -r output/web/
+	rm -r output/
 
 .PHONY: clean all web linux
 

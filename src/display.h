@@ -29,6 +29,7 @@ void display_close();
 // void draw_UI
 // void draw_menu
 void display_draw_gamestate();
+void display_draw_snapshot(const struct Snapshot* snapshot);
 // void update_window();
 
 // exposing drawing related util functions for objects to use

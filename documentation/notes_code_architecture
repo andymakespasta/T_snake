@@ -1,1 +1,27 @@
-Snake game from outside:
+
+
+main.c:
+	simple startup layer & emscripten shim.
+		starts main_loop. This this calls "engine_loop"
+
+engine.c
+	handles "real time"
+	handles input by sending it to specific managers / objects.
+	calls ticks on all the managers. //this is always before object ticks.
+	calls ticks on all the objects.
+	calls the draw function on current gamestate.
+
+gamestate.h: central location for gamestate object
+
+
+managers:
+	timeline manager: 
+		potentially completely wipes the board and replaces with new objects.
+		takes snapshots.
+		
+
+
+objects:
+	need to implement a tick function (updates the object) 
+	need to implement a draw function
+
