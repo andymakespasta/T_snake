@@ -1,0 +1,26 @@
+=================================================
+*   Requirements                                *
+=================================================
+SDL2 SDL2-ttf
+  on debian/ubuntu:
+    sudo apt-get install libsdl2-dev libsdl2-ttf-dev
+  otherwise, you may see compile errors such as:
+    fatal error: SDL2/SDL.h: No such file or directory
+    fatal error: SDL2/SDL_ttf.h: No such file or directory   
+
+Web version also requires:
+
+Emscripten
+  Follow instructions at https://emscripten.org/docs/getting_started/downloads.html
+  download, unpack, add to path
+
+
+
+Built successfully with following versions:
+
+
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.11
+clang version 12.0.0 (/b/s/w/ir/cache/git/chromium.googlesource.com-external-github.com-llvm-llvm--project f4c8b80318005ca61bfed9b40ee9e6039194159b)
+Target: x86_64-unknown-linux-gnu
+
+gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) 
