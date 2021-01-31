@@ -1,5 +1,3 @@
-
-
 main.c:
 	simple startup layer & emscripten shim.
 		starts main_loop. This this calls "engine_loop"
@@ -13,15 +11,30 @@ engine.c
 
 gamestate.h: central location for gamestate object
 
-
 managers:
 	timeline manager: 
 		potentially completely wipes the board and replaces with new objects.
 		takes snapshots.
-		
 
 
-objects:
+objects: (blah_obj.c / blah_obj.h)
+  any code that is specific to an object / interaction between objects should be in an object
 	need to implement a tick function (updates the object) 
 	need to implement a draw function
 
+
+
+
+echo_objects:
+  objects that follow behaviour from first time through timeline.
+  contains reference to corresponding object in the past.
+  Each tick, check past object, and update self location.
+  need to implement a draw function (call draw of original function!)
+
+
+
+
+snake object:
+  One way to write the snake game would be to have the object just be a head + a list of body parts.
+  Each step, the head moves forward, and spawns a body part.
+  The body part displayed depends on how far it is from the head.

@@ -22,11 +22,17 @@ enum Direction {
 	RIGHT,
 };
 
-// enum GameObjectType {
-// 	SNAKE,
-// 	PELLET,
-// 	SNAKE_ECHO,
-// };
+class GameObject {
+  void* ptr;
+ public:
+  enum GameObjectType {
+    EMPTY,
+    SNAKE,
+    PELLET,
+    SNAKE_ECHO,
+  } type;
+}
+
 
 // struct GameObject {
 // 	enum GameObjectType type;

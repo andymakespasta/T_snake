@@ -12,9 +12,19 @@ Web version also requires:
 
 Emscripten
   Follow instructions at https://emscripten.org/docs/getting_started/downloads.html
-  download, unpack, add to path
+  download, (unpack,)
+  install
+  activate
+  add to path
 
+  Latest tested working version:
+  emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 2.0.11
 
+  possibly, the correct python is also required:
+  tested works with:
+  sudo apt-get install python3
+  2.7.3
+  (if you see syntax error, this is likely cause) 
 
 Built successfully with following versions:
 

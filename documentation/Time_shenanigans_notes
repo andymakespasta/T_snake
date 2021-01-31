@@ -1,0 +1,58 @@
+Types of time shenanigans:
+
+rewind: 
+  time flows backwards. Actions are undone.
+
+past_warp (traveling backwards in time): 
+  Character jumps back in time.
+  From outside perspective, character disappears, then reappears in the past.
+  From player/character perspective, they enter the warp, everything flows backwards, they exit the warp, their past self is doing whatever.
+  Because this is snake, entering the warp will take some time.
+
+reverse_time:
+  Player contines moving as normal, but outside time flows backwards.
+  This is similiar to past_warp, except 
+
+
+Paradox trigger:
+  blocking past snake
+  -> killing past snake
+  stealing past snake's pellets
+  -> stealing past snake's pellets to point of 
+
+
+
+
+Paradox resolution methods:
+  game_over: easy to implement.
+  rewind to point of warp: may require longer history.
+  recalculate and update present:
+    
+
+
+
+
+
+
+Implementation:
+
+history:
+
+rewind:
+  reset state to previous state in history. Some history is "destroyed" as we rewind past it.
+
+past_warp:
+  entering_warp: (only needed because we're playing snake, and character takes up space)
+    high speed snake entering hole
+  start_past_warp:
+    warp_enter = now
+    warp_exit = now
+    current character
+  past_warping:
+    warp_exit--
+    display history(warp_exit)
+    display warping character.
+  exit warp:
+    create echo object
+
+  create echo objects that are linked to history

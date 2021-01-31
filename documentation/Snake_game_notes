@@ -1,0 +1,17 @@
+Snake movement:
+  The snake will always be of fixed length (even if we're moving at double speed)
+
+
+
+
+
+
+
+Random pellet generation:
+  Random, but fixed order.
+  The nth random pellet will always be at the same spot:
+    if you rewind past eating -> generating pellet, then eat the pellet again, the new pellet will be at the same spot.
+    if you travel to the past (and steal a pellet from yourself without killing yourself), the new pellet will be at the same spot as the next pellet in the past (potentially creating a domino effect of changes).
+
+  If a pellet is blocked, move to close adjacent space.
+    Search in spiralling diamond pattern
