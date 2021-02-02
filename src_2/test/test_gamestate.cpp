@@ -1,38 +1,35 @@
 #include "stdio.h"
 #include "assert.h"
 
-#include "gamestate.h"
+#include "gamestate.hpp"
 
-
-
-class Thing : public InGameObject {
-public:
-  Point pos;
-};
+#include "common_test_objects.hpp"
 
 int main(){
   printf("==============================\n");
   printf("Gamestate Test\n");
 
-
-
   Thing test_thing;
-  test_thing.pos.x = 1;
-  test_thing.pos.y = 2;
+  test_thing.tick_count = 0;
+  test_thing.pos.x = 69;
+  test_thing.pos.y = 420;
   test_thing.type = InGameObject::SNAKE;
 
-  MapState map_state;
+  Thing test_thing_2;
+  test_thing_2.tick_count = 100;
+  test_thing_2.type = InGameObject::EMPTY;
 
-  map_state.objects.push_back(&test_thing);
+  Gamestate* game = new Gamestate();
+  game->map.objects.push_back(&test_thing);
+  game->map.objects.push_back(&test_thing_2);
 
-  Thing* got_thing = static_cast<Thing*>(map_state.objects[0]);
+  Thing* got_thing_1 = static_cast<Thing*>(game->map.objects[0]);
+  Thing* got_thing_2 = static_cast<Thing*>(game->map.objects[1]);
 
-
-  assert(got_thing->pos.x == 1);
-  assert(got_thing->pos.y == 2);
-  assert(got_thing->type == InGameObject::SNAKE);
-  
-
+  assert(got_thing_1->pos.x == 69);
+  assert(got_thing_1->pos.y == 420);
+  assert(got_thing_1->type == InGameObject::SNAKE);
+  assert(got_thing_2->type == InGameObject::EMPTY);
 
   printf("Complete\n");
   printf("==============================\n");

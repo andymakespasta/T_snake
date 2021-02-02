@@ -1,15 +1,47 @@
-main.c:
+main.cpp:
 	simple startup layer & emscripten shim.
-		starts main_loop. This this calls "engine_loop"
+	Initializes and starts main_loop	
 
-engine.c
-	handles "real time"
-	handles input by sending it to specific managers / objects.
+engine.hpp
+	# probably only used by main.c
+
+engine.cpp
+	# The base class for the whole game.
+	# should not contain anything specific to this game
+	Handles and owns all the other objects and classes.
+	Handles "real time"
+	handles input
 	calls ticks on all the managers. //this is always before object ticks.
 	calls ticks on all the objects.
 	calls the draw function on current gamestate.
 
-gamestate.h: central location for gamestate object
+gamestate.hpp
+	# Should be used by any code that wants to interact with other objects in the game.
+
+gamestate.cpp
+	# Handles storage of everything game-related: current map state, time, score etc.
+	# should not contain anything specific to this game
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 managers:
 	timeline manager: 

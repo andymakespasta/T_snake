@@ -3,8 +3,8 @@
 ################################
 NAME=T_snake
 
-export SOURCES = $(wildcard *.cpp)
-export INCLUDES = $(wildcard *.h)
+export SOURCES = $(abspath $(wildcard *.cpp))
+export INCLUDES = $(abspath $(wildcard *.hpp))
 ASSETS = 
 
 all: web linux
@@ -25,7 +25,9 @@ EMCC_FLAGS += -s USE_SDL=2 -s USE_SDL_TTF=2
 EMCC_FLAGS += -s ALLOW_MEMORY_GROWTH=1
 # EMCC_FLAGS += -s TOTAL_MEMORY=1342177280
 EMCC_FLAGS += --emrun
-EMCC_FLAGS += --preload-file assets
+ifdef $(ASSETS)
+EMCC_FLAGS += --preload-file $(ASSETS)
+endif
 # EMCC_FLAGS += -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall", "cwrap"]'
 export EMCC_FLAGS
 
@@ -49,7 +51,7 @@ output/web/$(NAME).html output/web/$(NAME).js output/web/$(NAME).wasm &: $(SOURC
 
 export CXX=g++
 export CXXFLAGS= -I${CURDIR}
-export LDFLAGS= -lSDL2 -lSDL2_ttf
+export LDFLAGS= -lSDL2 -lSDL2_ttf -lstdc++
 
 linux: output/linux/$(NAME)
 	@echo "created linux version"
