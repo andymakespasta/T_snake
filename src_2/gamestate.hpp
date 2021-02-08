@@ -5,6 +5,7 @@
 #include <array>
 #include <memory>
 #include <functional>
+// #include <compare>
 
 #define GAMESTATE_MANAGERS 0
 
@@ -17,6 +18,7 @@
 // common types
 struct Point {
   int x,y; // coordinates, not screen location 0,0 is top left block, x is rightwards, y is downwards
+  bool operator==(const Point& rh){return (this->x == rh.x && this->y == rh.y); }
 };
 enum Direction {
   NONE = 0,
@@ -25,6 +27,8 @@ enum Direction {
   LEFT,
   RIGHT,
 };
+
+class Gamestate;
 
 // Base Class for all objects
 class InGameObject {
@@ -40,6 +44,8 @@ class InGameObject {
   // update object by 1 tick.
   virtual void tick() {};
   virtual std::vector<Point> get_coords() {return {}; };
+  // used by implementations to get the state of things around them.
+  static Gamestate* game;
 };
 
 class Manager {
@@ -54,7 +60,7 @@ public:
 // // a view of the world based on the map
 // class MapCache {
 
-// }
+// };
 
 // all the objects currently in the world
 // provides easy to use API to get information on the map
@@ -69,7 +75,7 @@ public:
 
 public:
   // MapstateGridCache* // speeds up get_object_at_coord
-  InGameObject* get_object_at_coord(Point);
+  std::shared_ptr<InGameObject> get_object_at_coord(Point);
   InGameObject::ObjectType get_object_type_at_coord(Point);
 };
 

@@ -8,6 +8,7 @@ class Pellet: public InGameObject {
   public:
   	Pellet(Point pos, int expire_ticks = -1);
   	void tick();
+  	std::vector<Point> get_coords();
 
 	Point pos;
 	// negative values will never expire.

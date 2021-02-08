@@ -15,3 +15,7 @@ void Pellet::tick() {
 		printf("expired");
 	}
 }
+
+std::vector<Point> Pellet::get_coords() {
+	return std::vector<Point>( {pos} );
+}

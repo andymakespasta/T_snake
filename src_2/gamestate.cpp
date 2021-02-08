@@ -1,20 +1,32 @@
 #include "gamestate.hpp"
 #include "gamestate.hpp"
 
-InGameObject* MapState::get_object_at_coord(Point){
-	// //TODO: add caching
-	// for (auto iter = objects.begin(); iter != objects.end(); ++iter ) {
-	// 	(*iter)->tick();
-	// }
+Gamestate* InGameObject::game = NULL;
+
+std::shared_ptr<InGameObject> MapState::get_object_at_coord(Point point){
+	// //TODO: add caching / better system
+	for (auto iter = objects.begin(); iter != objects.end(); ++iter ) {
+		auto object_coord_list = (*iter)->get_coords();
+		for (auto object_iter = object_coord_list.begin(); object_iter != object_coord_list.end(); ++object_iter) {
+			if ((*object_iter) == point ) {
+				return (*iter);
+			}
+		}
+	}
 	return NULL;
 }
 
-InGameObject::ObjectType MapState::get_object_type_at_coord(Point) {
+InGameObject::ObjectType MapState::get_object_type_at_coord(Point point) {
 	//TODO: add caching
 
-	// for (auto iter = objects.begin(); iter != objects.end(); ++iter ) {
-	// 	(*iter)->tick();
-	// }
+	for (auto iter = objects.begin(); iter != objects.end(); ++iter ) {
+		auto object_coord_list = (*iter)->get_coords();
+		for (auto object_iter = object_coord_list.begin(); object_iter != object_coord_list.end(); ++object_iter) {
+			if ((*object_iter) == point ) {
+				return (*iter)->type;
+			}
+		}
+	}
 	return InGameObject::EMPTY;
 }
 
