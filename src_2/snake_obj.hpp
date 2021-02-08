@@ -6,15 +6,16 @@
 #include "gamestate.hpp"
 
 class Snake: public InGameObject {
-
-
 public:
-	Snake(Point head={5,10}, Direction direction = RIGHT, int length = 5, int mtpm = 9000);
+	Snake(Point head={5,10}, Direction direction = RIGHT, int length = 5, int mtpm = 7000);
 
-	//draw
 	void tick();
 	void move();
 	void queued_turn(enum Direction direction);
+	//void draw()??
+	std::vector<Point> get_coords();
+
+	void hit_pellet();
 
 	enum Direction last_move;
 	enum Direction direction; //where next block is to be placed
@@ -32,7 +33,8 @@ public:
 	// the front of the deque is the head, the back is the tail
 	std::deque<Point> q_body;
 	
-	std::vector<Point> v_body;
+	//TODO: compare speed with vectors.
+	// std::vector<Point> v_body;
 };
 
 #endif

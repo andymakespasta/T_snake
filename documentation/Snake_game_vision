@@ -1,0 +1,208 @@
+T-Snake: full game vision:
+
+Basic idea: snake + special abilities + castlevania style puzzle/combat rooms
+
+Framing: T-snake is a cyber-espionage tool. You steal data, sell it, buy compute to upgrade your snake. T-snake can also collect interesting code fragments to gain new abilities.
+
+Basic Plot: you break into a mega-corp's network, and steal data. You eventually find a time travelling program, which triggers a backtrace. You must escape the facility in a race against time, and return to your home node before agents come to take you out. However, you have time related powers up your sleeve.
+
+Basic gameplay: you enter rooms(network nodes) via ports. Rooms have obstacles, traps and enemies that you can overcome with skills and abilities. The game is basically snake, you're constantly moving, and have to plan your path. Abilities are all movement related: modifying your speed, rewinding, time travel... OR triggered by moving in specific ways: passing next to target / surrounding target.
+
+
+(pick-a-door with rewind, needing to be in two places with time travel.)
+(ex. switch/gate puzzle, given snake constraints. ex. need to be certain length to hit multiple switches at the same time.) 
+
+
+
+
+
+
+You're rooting around in the megacorps network for what?
+
+When you collect a data pellet, it randomly generates data: personal financial, passwords, research, etc.
+
+Collect data packets for chits/compute (with a cent symbol)
+Collect code fragments to unlock new abilities / upgrades
+
+Snake stats:
+basic:
+	core integrity (health)
+	data recovery (health regen)
+	code size (snake body length at start)
+	base speed
+
+abilities:
+	dash
+	slow
+	surround stun
+	graze debuff
+	launch projectile from consuming data
+	fast travel
+	* secret signs * (not actual abilities)
+
+upgrading most abilities increases code size, effectively limiting the number of abilities you want to equip.
+You can decrease an ability's level / disable abilities whenever you want.
+
+
+
+metroidvania style game, but each room is a mini snake game / puzzle
+
+Gameplay loop:
+Food appears randomly. Some enemies are edible, some need to be killed before they become edible.
+Eating increases length, restores health, and energy.
+When you bump, you lose a large chunk of health, and stop for a second.
+When you are attacked, you lose a little chunk of health.
+At savepoints, you can reduce your length to trade for upgrades. (max health, energy, regen, food spawn, energy usage.)
+When you die, you respawn from savepoint.
+
+Dr. Gu:semon (is actually a mongoose)
+
+Abilities:
+
+rush: doub### snake:
+snake x metroidvaina.
+metroidvania style game, but each room is a mini snake game / puzzle
+
+Gameplay loop:
+Food appears randomly. Some enemies are edible, some need to be killed before they become edible.
+Eating increases length, restores health, and energy.
+When you bump, you lose a large chunk of health, and stop for a second.
+When you are attacked, you lose a little chunk of health.
+At savepoints, you can reduce your length to trade for upgrades. (max health, energy, regen, food spawn, energy usage.)
+When you die, you respawn from savepoint.
+
+Abilities:
+
+rush: double tap in moving direction to gain a burst of speed.
+stop: tap in reverse to moving direcion to slow down (to a stop)
+ram: increased hardness when rushing. MAX: invul when rushing.
+time travel: holding action button causes you to travel in time
+regurgitate: if you just ate, you can cough it back up to fire projectile.
+Enemies are small mammals and birds?
+
+spear: hardness 0, hardness 3 in one direction, slow turn, move
+eat from correct direction.
+runner: hardness 0, moves as fast as you, hardness 3 in forward
+rush to catch from behind.
+snake: hardness 2 on sides, hardness 1 on forwards direction.
+surround and make then hit your side.
+shooter: hardness 0, slow move, fires projectiles in cardinal direction.
+same as spear, but harder to handle in numbers.
+gates / puzzles:
+requiring certain length to cover multiple switches.
+timed switch requires rush to reach door.
+narrow tube (width 2) with "airlock mechanism" requires stop, or skillful twisting.
+using time travel to duplicate yourself to hit more switches.
+using time travel to replace stop ability.
+le tap in moving direction to gain a burst of speed.
+
+stop: tap in reverse to moving direcion to slow down (to a stop)
+ram: increased hardness when rushing. MAX: invul when rushing.
+time travel: holding action button causes you to travel in time
+regurgitate: if you just ate, you can cough it back up to fire projectile.
+Enemies are small mammals and birds?
+
+spear: hardness 0, hardness 3 in one direction, slow turn, move
+eat from correct direction.
+runner: hardness 0, moves as fast as you, hardness 3 in forward
+rush to catch from behind.
+snake: hardness 2 on sides, hardness 1 on forwards direction.
+surround and make then hit your side.
+shooter: hardness 0, slow move, fires projectiles in cardinal direction.
+same as spear, but harder to handle in numbers.
+gates / puzzles:
+requiring certain length to cover multiple switches.
+timed switch requires rush to reach door.
+narrow tube (width 2) with "airlock mechanism" requires stop, or skillful twisting.
+using time travel to duplicate yourself to hit more switches.
+using time travel to replace stop ability.
+
+Enemies are small mammals and birds?
+
+spear: hardness 0, hardness 3 in one direction, slow turn, move
+eat from correct direction.
+runner: hardness 0, moves as fast as you, hardness 3 in forward
+rush to catch from behind.
+snake: hardness 2 on sides, hardness 1 on forwards direction.
+surround and make then hit your side.
+shooter: hardness 0, slow move, fires projectiles in cardinal direction.
+same as spear, but harder to handle in numbers.
+gates / puzzles:
+requiring certain length to cover multiple switches.
+timed switch requires rush to reach door.
+narrow tube (width 2) with "airlock mechanism" requires stop, or skillful twisting.
+using time travel to duplicate yourself to hit more switches.
+using time travel to replace stop ability.
+
+Setting:
+cyberspace, you're an AI worm, entering a AdvancedResearchNet.
+Each room is a separate computer.
+Savepoints are data jacks that lead to your home computer. The home computer has infinite energy, training course, upgrade, spawn point.
+
+special abilities:
+dash
+movement
+phase through
+movement
+time slip
+movement
+
+ram : when dashing, increase hardness
+combat / enable
+surround: when surround, attack stun
+combat / enable (switch deadend)
+decrypter: touching, decrease armor.
+combat / enable (hardened switch)
+stream of data when adjacent
+
+fast travel: network protocol
+enable travel between special nodes.
+secret signs: on special floors, if you make a special shape, triggers switch.
+
+order of special abilities:
+part 1: dash and combat
+setting: general research.
+dash
+teach health system
+combat
+some enemies need speed
+gain dash
+combat
+teach energy system
+boss
+fast travel
+travel closer to start.
+travel to secrets
+travel to new area.
+decrypter
+hardened enemies,
+get upgrade
+hardened gates,
+hardened boss to return to hub
+part 2: hardening (hardened gate)
+setting: crypto and security
+phase
+enemy snakes
+small spaces
+moving wall boss.
+ram
+enemy snakes
+secret sign
+
+part 3: time shenanegins
+setting: top secret research
+save point right before sanctum.
+enter sanctum, gain timeslip power.
+some special traps.
+The traps show that the home PC has been traced, and agents are heading for retrieval. (ETA 5 mins)
+optional upgrades: surround.
+part 4: bringing it together
+(only spawn points, no data jacks.)
+trigger trap
+escape with data.
+ending 1: hacker was traced. The home jack is a trap.
+ending 2: reach home before timer, deliver data, allowing sending data to the past. Unlocks newgame+ (where you can get all upgrades from an incoming message)
+ending 3: never use the home computer, reach home right after you enter the maze, giving your owner plenty of time to escape.
+
+ending 1.5: paradox. You move back in time and cause a paradox, which prevents the time travel from actually working.
+ending 2: you escape back in time and get out unscathed. (there is a datajack next to a large energy charge floor. and you can go back in time infinitely back to right as you put in the snake.)

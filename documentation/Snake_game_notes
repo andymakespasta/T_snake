@@ -1,17 +1,66 @@
 Snake movement:
-  The snake will always be of fixed length (even if we're moving at double speed)
+  The snake will always be of fixed max length (even if we're moving at double speed)
+  The snake will ALWAYS enter a space head-first.
 
 
+Snake collisions object interactions.
+	A lot of the objects in the game are consumables:
+		When your snake head encounters them, they disappear, and some effect is applied. These cannot move into other objects.
+		usually displayed with yellow, and are smaller than the grid.
+
+	Other objects are guidelines
+		They have no effect in-game.
+		usually displayed with low values (grey) or with scanning animation
+
+	Other objects are projectiles
+		When your snake (or another object) encounters them in any way (your head moving into them, or the object moving into your body), their effects are applied.
+		usually displayed with red, or with scrambled data animation.
+
+	Other objects have a hardness rating + fixed/unfixed.
+		When two objects with hardness collide, lower hardness object is damaged.
+		When two objects have the same hardness, both take damage.
+		When the snake head hits a fixed object, it stops for a short bit, during which player can turn. 
+		When the snake head hits an unfixed object, it keeps going.
+		The snake body is a fixed object. When enemies hit it, they bounce back.
+		Walls are fixed objects with high hardness.
+
+	Hardening / (encryption): when things collide, lower hardness object is damaged
+		displayed via texture + outline:
+			hardness - modifier: lighter, and missing pixels.
+			hardness + modifier: glowing outline (blueish). Multiple layers cycling colors.
 
 
+Spawn Manager:
+	Take as input a spawn plan for every level:
+		The normal snake pellet behaviour would be an "infinite level" with the spawn plan:
+			random 1 -> random 1 -> random 1 -> ....
+		An interesting level would be escalation:
+			alarm 1 -> alarm diamond 8 -> alarm larger diamond 12
+	Default is nothing / repeat alarm 1 at random location.
 
+	ideas for Enemy / Food types:
+		pellet / (raw data):
+			does nothing. Easy pickins. Can change your stats in various ways.
+		alarm:
+			countdown. On timeout, spawns other things at fixed locations.
+		trip_alarm:
+			if you enter trigger spaces, spawns other things.
+		shield:
+			high hardness in one direction.
+		shooter:
+			shoots damaging pellets in one direction
+		rush:
+			when running, can damage other things
 
+	Random generation:
+		random is essentially a spawn point that was known beforehand: the nth random item will be the same item and at the same spot.
+		if you rewind past eating -> generating pellet, then eat the pellet again, the new pellet will be at the same spot.
+	    if you travel to the past (and steal a pellet form yourself without killing yourself), the new pellet will be at the same spot as the next pellet in the past (potentially creating a domino effect of changes).		
 
-Random pellet generation:
-  Random, but fixed order.
-  The nth random pellet will always be at the same spot:
-    if you rewind past eating -> generating pellet, then eat the pellet again, the new pellet will be at the same spot.
-    if you travel to the past (and steal a pellet from yourself without killing yourself), the new pellet will be at the same spot as the next pellet in the past (potentially creating a domino effect of changes).
+	Blocking:
+		If something would be spawned in a blocked location, move to close adjacent space, without changing orientation.
+		Search in spiralling diamond pattern.
 
-  If a pellet is blocked, move to close adjacent space.
-    Search in spiralling diamond pattern
+Enemies:
+	When collided in the correct way, will shatter. Some enemies can reform if not collected. 
+	Enemies don't have to follow grid pattern. Weak point has to be bigger than 1 space.

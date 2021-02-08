@@ -1,7 +1,9 @@
 #include "snake_obj.hpp"
+#include "pellet_obj.hpp"
 #include "stdio.h"
 
 Snake::Snake(Point head, Direction dir, int len, int mtpm) {
+	type = SNAKE;
 	milli_ticks_per_move = mtpm;
 	milli_ticks_till_move = milli_ticks_per_move;
 
@@ -23,21 +25,20 @@ void Snake::tick() {
 }
 
 void Snake::move() {
-	struct Point head = q_body.front();
-	struct Point next;
+	struct Point next = q_body.front();;
 
 	switch(direction){
 		case UP:
-			next.y = head.y - 1;
+			next.y = next.y - 1;
 			break;
 		case DOWN:
-			next.y = head.y + 1;
+			next.y = next.y + 1;
 			break;
 		case LEFT:
-			next.x = head.x - 1;
+			next.x = next.x - 1;
 			break;
 		case RIGHT:
-			next.x = head.x + 1;
+			next.x = next.x + 1;
 			break;
 		default:
 			break;
@@ -76,9 +77,9 @@ void Snake::queued_turn(enum Direction new_direction) {
 			(new_direction == UP || new_direction == DOWN)) {
 			direction = new_direction;
 		}
-		else {
-			direction = new_direction;	
-		}
+		// else {
+		// 	direction = new_direction;	
+		// }
 	}
 	else {
 		if (queued_direction != NONE) return; // already queued
@@ -93,4 +94,18 @@ void Snake::queued_turn(enum Direction new_direction) {
 			}
 		}
 	}
+}
+
+std::vector<Point> Snake::get_coords(){
+	std::vector<Point> vec;
+	for (auto it = q_body.begin(); it!=q_body.end(); ++it){
+		vec.push_back(*it);
+	}
+	return vec;
+}
+
+
+
+void Snake::hit_pellet() {
+
 }

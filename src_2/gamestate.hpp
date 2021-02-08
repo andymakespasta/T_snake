@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <array>
+#include <memory>
+#include <functional>
 
 #define GAMESTATE_MANAGERS 0
 
@@ -37,12 +39,17 @@ class InGameObject {
 
   // update object by 1 tick.
   virtual void tick() {};
+  virtual std::vector<Point> get_coords() {return {}; };
 };
 
 class Manager {
 public:
+  typedef std::function<void (InGameObject*)> NotifyFunc;
+public:
   virtual void tick();
 };
+
+
 
 // // a view of the world based on the map
 // class MapCache {
@@ -56,12 +63,14 @@ public:
   // list of pointers to static game objects.
   // list of pointers to moving game objects.
   // TODO: check if vector of pointers is best type for this
-  std::vector<InGameObject*> objects;
+
+  // std::vector<InGameObject*> objects;
+  std::vector<std::shared_ptr<InGameObject>> objects;
 
 public:
   // MapstateGridCache* // speeds up get_object_at_coord
-  InGameObject* get_object_at_coord();
-  InGameObject::ObjectType get_object_type_at_coord();
+  InGameObject* get_object_at_coord(Point);
+  InGameObject::ObjectType get_object_type_at_coord(Point);
 };
 
 

@@ -10,6 +10,7 @@
 
 
 class Gamestate;
+class Display;
 
 class Engine {
 public:
@@ -41,6 +42,7 @@ private:
 
 private:
 	Gamestate* game;
+	Display* display;
 	uint32_t last_loop_time;
 
 };
