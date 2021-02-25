@@ -1,7 +1,7 @@
 
 
 
-all: snake
+all: gamestate
 
 gamestate:
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -D TEST_BUILD=1 test_gamestate.cpp $(SOURCES) -o out/gamestate

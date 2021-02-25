@@ -117,10 +117,8 @@ void Engine::temp_check_inputs() {
 
 void Engine::temp_initialize_gamestate() {
 
-	InGameObject::game = game;
-
 	// player_snake = new Snake;
-	player_snake = std::make_shared<Snake>();
+	player_snake = std::make_shared<Snake>( game );
 	game->map.objects.push_back(player_snake);
 
 	// test_pellet = new Pellet({10,10});

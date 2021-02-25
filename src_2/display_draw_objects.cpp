@@ -61,12 +61,17 @@ void Display::draw_snake_object(const Snake* snake, const SDL_Color* color){
 }
 
 void Display::draw_pellet_object(const Pellet* pellet){
+	// if (pellet->ticks_till_expire > 0){
+	// 	//TODO: add text counter;
+	// }
 	if (pellet->ticks_till_expire > 100 || pellet->ticks_till_expire < 0){
-		SDL_SetRenderDrawColor( renderer, 0xff, 0xff, 0xff, 0x00 );	
+		SDL_SetRenderDrawColor( renderer, 0xaf, 0xff, 0xaf, 0x00 );	
 	}
 	else {
 		short val = pellet->ticks_till_expire * 0xff / 100;
-		SDL_SetRenderDrawColor( renderer, 0xff, val, val, 0x00 );		
+		SDL_SetRenderDrawColor( renderer, 0xff, 
+					pellet->ticks_till_expire * 0xff / 100,
+					pellet->ticks_till_expire * 0xaf / 100, 0x00 );		
 	}
 	SDL_Rect rect = point_to_rect(pellet->pos);
 	//TODO: make this pixel diamond.
@@ -76,3 +81,13 @@ void Display::draw_pellet_object(const Pellet* pellet){
 	rect.h -= 6;
 	SDL_RenderFillRect(renderer, &rect);//TODO: possible optimization using SDL_RenderFillRects	
 }
+
+// void Display::draw_wall_object(const Wall* snake){
+// 	SDL_SetRenderDrawColor( renderer, color->r, color->g, color->b, color->a );
+// 	SDL_Rect rect;
+// 	for (auto it = snake->q_body.begin(); it!=snake->q_body.end(); ++it){
+// 		// printf("%d-%d|",(*it).x , (*it).y);
+// 		rect = point_to_rect(*it);
+// 		SDL_RenderFillRect(renderer, &rect);
+// 	}
+// }

@@ -1,8 +1,12 @@
+#include "gamestate.hpp"
 #include "snake_obj.hpp"
 #include "pellet_obj.hpp"
 #include "stdio.h"
 
-Snake::Snake(Point head, Direction dir, int len, int mtpm) {
+#include <cassert>
+
+Snake::Snake(Gamestate* game, Point head, Direction dir, int len, int mtpm) {
+	_game = game;
 	type = SNAKE;
 	milli_ticks_per_move = mtpm;
 	milli_ticks_till_move = milli_ticks_per_move;
@@ -12,7 +16,6 @@ Snake::Snake(Point head, Direction dir, int len, int mtpm) {
 	queued_direction = NONE;
 
 	length = len;
-
 	q_body.push_front(head);
 }
 
@@ -45,10 +48,24 @@ void Snake::move() {
 	}
 
 	// check boundaries and collisions
-	// if (next.y >= MAX_VER_BLOCKS){ next.y = 0; }
-	// if (next.x >= MAX_HOR_BLOCKS){ next.x = 0; }
-	// if (next.y < 0){ next.y = MAX_VER_BLOCKS-1; }
-	// if (next.x < 0){ next.x = MAX_HOR_BLOCKS-1; }
+	if (_game->map.get_object_type_at_coord(next) == InGameObject::SNAKE ){
+		assert(0);
+	}
+	if (_game->map.get_object_type_at_coord(next) == InGameObject::WALL ){
+		assert(0);
+	}
+
+	if (_game->map.get_object_type_at_coord(next) == InGameObject::PELLET ){
+		++length;
+		auto pPellet = _game->map.get_object_at_coord(next);
+		_game->map.delete_object(pPellet);
+	}
+
+	//TODO: change this into special "portal objects" at the edge
+	if (next.y >= MAX_VER_BLOCKS){ next.y = 0; }
+	if (next.x >= MAX_HOR_BLOCKS){ next.x = 0; }
+	if (next.y < 0){ next.y = MAX_VER_BLOCKS-1; }
+	if (next.x < 0){ next.x = MAX_HOR_BLOCKS-1; }
 
 	// update snake body 1 space
 	q_body.push_front(next);
@@ -107,5 +124,8 @@ std::vector<Point> Snake::get_coords(){
 
 
 void Snake::hit_pellet() {
+	//get details on pellet
+	//update self/score based on pellet
+	//delete pellet
 
 }

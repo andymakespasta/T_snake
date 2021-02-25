@@ -8,7 +8,8 @@ engine.hpp
 engine.cpp
 	# The base class for the whole game.
 	# should not contain anything specific to this game
-	Handles and owns all the other objects and classes.
+	Handles and owns Display object
+	Handles and owns Gamestate object, through that, all other objects.
 	Handles "real time"
 	handles input
 	calls ticks on all the managers. //this is always before object ticks.
@@ -16,27 +17,20 @@ engine.cpp
 	calls the draw function on current gamestate.
 
 gamestate.hpp
+	# Central object from which all in game objects can be acquired.
 	# Should be used by any code that wants to interact with other objects in the game.
 
 gamestate.cpp
 	# Handles storage of everything game-related: current map state, time, score etc.
-	# should not contain anything specific to this game
+	Should not contain any specific to snake game.
 
+display.hpp
+	# Should be called from engine
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+display.cpp
+	# generic
+display_draw_objects.cpp
+	# how to draw each object
 
 
 
@@ -47,12 +41,21 @@ managers:
 	timeline manager: 
 		potentially completely wipes the board and replaces with new objects.
 		takes snapshots.
+		handles all the time shenanigans
 
+	spawn manager:
+		spawns objects based on plan (for this level).
+		detects when previously spawned objects are destroyed (via callback?)
 
 objects: (blah_obj.c / blah_obj.h)
-  any code that is specific to an object / interaction between objects should be in an object
+  any code that is specific to an object / interaction between objects should be in the
 	need to implement a tick function (updates the object) 
 	need to implement a draw function
+
+	when two objects interact, the rule is, the code is placed on the object that is affected.
+	So when a snake hits a wall, it should damage itself.
+	So when a snake hits a pellet, it should check the properties of the pellet, then modify itself(add length, energy), then call a function "get eaten" on the pellet.
+	When a projectile hits the snake, it should call snake.damage.
 
 
 

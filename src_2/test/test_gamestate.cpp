@@ -9,19 +9,33 @@ int main(){
   printf("==============================\n");
   printf("Gamestate Test\n");
 
-  Thing test_thing;
-  test_thing.tick_count = 0;
-  test_thing.pos.x = 69;
-  test_thing.pos.y = 420;
-  test_thing.type = InGameObject::SNAKE;
+  std::shared_ptr<Thing> thing1 = std::make_shared<Thing>();
+  thing1->tick_count = 0;
+  thing1->pos.x = 69;
+  thing1->pos.y = 420;
+  thing1->type = InGameObject::SNAKE;
 
-  Thing test_thing_2;
-  test_thing_2.tick_count = 100;
-  test_thing_2.type = InGameObject::EMPTY;
+  std::shared_ptr<Thing> thing2 = std::make_shared<Thing>();
+  thing2->tick_count = 0;
+  thing2->pos.x = 5;
+  thing2->pos.y = 5;
+  thing2->type = InGameObject::EMPTY;
+
+  std::shared_ptr<BigThing> bigthing3 = std::make_shared<Thing>();
+  thing2->tick_count = 0;
+  thing2->pos.x = 5;
+  thing2->pos.y = 5;
+  thing2->type = InGameObject::EMPTY;
+
 
   Gamestate* game = new Gamestate();
-  game->map.objects.push_back(&test_thing);
-  game->map.objects.push_back(&test_thing_2);
+
+  game->map.add_object(thing1);
+  game->map.add_object(thing2);
+
+
+  delete_object
+
 
   Thing* got_thing_1 = static_cast<Thing*>(game->map.objects[0]);
   Thing* got_thing_2 = static_cast<Thing*>(game->map.objects[1]);

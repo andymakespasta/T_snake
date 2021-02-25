@@ -1,7 +1,9 @@
+// Defines commonly used types, and the Gamestate object which is passed around to many objects.
 #ifndef GAMESTATE_HPP
 #define GAMESTATE_HPP
 
 #include <vector>
+#include <list>
 #include <array>
 #include <memory>
 #include <functional>
@@ -14,12 +16,14 @@
 #define MAX_HOR_BLOCKS 40
 #define MAX_VER_BLOCKS 30
 
+class Gamestate;
 
 // common types
 struct Point {
-  int x,y; // coordinates, not screen location 0,0 is top left block, x is rightwards, y is downwards
+  int x,y; // coordinates, not screen location 0,0 is top left block, x+ is rightwards, y+ is downwards
   bool operator==(const Point& rh){return (this->x == rh.x && this->y == rh.y); }
 };
+
 enum Direction {
   NONE = 0,
   UP,
@@ -27,8 +31,6 @@ enum Direction {
   LEFT,
   RIGHT,
 };
-
-class Gamestate;
 
 // Base Class for all objects
 class InGameObject {
@@ -38,14 +40,13 @@ class InGameObject {
     EMPTY,
     SNAKE,
     PELLET,
+    WALL,
     SNAKE_ECHO,
   } type;
 
   // update object by 1 tick.
   virtual void tick() {};
   virtual std::vector<Point> get_coords() {return {}; };
-  // used by implementations to get the state of things around them.
-  static Gamestate* game;
 };
 
 class Manager {
@@ -71,10 +72,16 @@ public:
   // TODO: check if vector of pointers is best type for this
 
   // std::vector<InGameObject*> objects;
-  std::vector<std::shared_ptr<InGameObject>> objects;
+  std::list<std::shared_ptr<InGameObject>> objects;
 
 public:
   // MapstateGridCache* // speeds up get_object_at_coord
+  
+  // adds an object to the vector (and map cache)
+  void add_object(std::shared_ptr<InGameObject>);
+  // deletes an object by removing all shared_ptr references 
+  void delete_object(std::shared_ptr<InGameObject>);
+
   std::shared_ptr<InGameObject> get_object_at_coord(Point);
   InGameObject::ObjectType get_object_type_at_coord(Point);
 };

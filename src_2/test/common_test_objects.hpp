@@ -11,6 +11,19 @@ public:
 
   Point pos;
   int tick_count;
+  std::vector<Point> get_coords() { return std::vector<Point>( {pos} ); }
+};
+
+
+class BigThing : public InGameObject {
+public:
+  void tick() {
+    tick_count ++;
+  }
+
+  std::vector<Point> pos;
+  int tick_count;
+  std::vector<Point> get_coords() { return pos; }
 };
 
 

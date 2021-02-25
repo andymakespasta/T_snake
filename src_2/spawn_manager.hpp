@@ -1,10 +1,13 @@
-#ifndef SPAWN_MANAGER_HPP
-#define SPAWN_MANAGER_HPP
+// #ifndef SPAWN_MANAGER_HPP
+// #define SPAWN_MANAGER_HPP
 
-class SpawnManager : public Manager {
+// #include "gamestate.hpp"
+
+// class SpawnManager : public Manager {
 	
-	void tick();
+// 	void tick();
+// 	void handleObjectDestroyed( std::shared_ptr<InGameObject> );
 
-};
+// };
 
-#endif //SPAWN_MANAGER_HPP
+// #endif //SPAWN_MANAGER_HPP

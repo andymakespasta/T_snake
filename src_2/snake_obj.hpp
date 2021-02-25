@@ -7,12 +7,17 @@
 
 class Snake: public InGameObject {
 public:
-	Snake(Point head={5,10}, Direction direction = RIGHT, int length = 5, int mtpm = 7000);
+	Snake(Gamestate* game,
+		  Point head={5,10}, 
+		  Direction direction = RIGHT, 
+		  int length = 5, 
+		  int mtpm = 7000);
 
 	void tick();
 	void move();
 	void queued_turn(enum Direction direction);
 	//void draw()??
+	//temp solution 
 	std::vector<Point> get_coords();
 
 	void hit_pellet();
@@ -33,6 +38,7 @@ public:
 	// the front of the deque is the head, the back is the tail
 	std::deque<Point> q_body;
 	
+	Gamestate* _game;
 	//TODO: compare speed with vectors.
 	// std::vector<Point> v_body;
 };
