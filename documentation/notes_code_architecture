@@ -32,20 +32,16 @@ display.cpp
 display_draw_objects.cpp
 	# how to draw each object
 
-
-
-
-
-
 managers:
 	timeline manager: 
 		potentially completely wipes the board and replaces with new objects.
 		takes snapshots.
-		handles all the time shenanigans
+		handles all the time shenanigans.
 
-	spawn manager:
-		spawns objects based on plan (for this level).
-		detects when previously spawned objects are destroyed (via callback?)
+	killspawn manager:
+		Objects should call this to remove other objects. This allows for removing themselves without getting a segfault.
+		When certain objects are killed, spawn manager can create new objects based on plan.
+		
 
 objects: (blah_obj.c / blah_obj.h)
   any code that is specific to an object / interaction between objects should be in the

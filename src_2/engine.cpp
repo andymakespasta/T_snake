@@ -53,17 +53,35 @@ void Engine::loop() {
 }
 
 void Engine::tick() {
+  // this should move somewhere else.
 	// tick all managers
+  printf("%d\n", game->time_ticks);
 	for (auto iter = game->managers.begin(); iter != game->managers.end(); ++iter) {
 		(*iter)->tick();
-		printf("m");
+		// printf("m");
 	}
-	// tick all objects in map
-	for (auto iter = game->map.objects.begin(); iter != game->map.objects.end(); ++iter ) {
-		(*iter)->tick();
-		printf("o");
-	}
-	printf("-tick\n");
+
+  // TODO: this probably belongs somewhere else.
+  if (game->game_time_state == Gamestate::NORMAL){
+    bool changed = 0;
+  	// tick all objects in map
+  	for (auto iter = game->map.objects.begin(); iter != game->map.objects.end(); ++iter ) {
+  		changed |= (*iter)->tick();
+  		// printf("o");
+  	}
+    game->time_ticks ++;
+    if (changed) {
+      game->take_snapshot();
+      printf("%d \n", game->history.size());
+    }
+  	// printf("-tick\n");
+  }
+
+  else if (game->game_time_state == Gamestate::REWINDING){
+    game->time_ticks--;
+    game->load_snapshot(game->time_ticks);
+    player_snake = game->map.get_snake_obj();
+  }
 }
 
 
@@ -99,6 +117,12 @@ void Engine::temp_check_inputs() {
                   case SDLK_x:
                   // case SDLK_SPACE: TODO: handle multiple key hold
                     printf("rewind start\n");
+                    game->start_rewind();
+                    // timeline_start_rewind();
+                  break;
+                  case SDLK_z:
+                  // case SDLK_SPACE: TODO: handle multiple key hold
+                    printf("backwarp start\n");
                     // timeline_start_rewind();
                   break;
                 }
@@ -108,6 +132,11 @@ void Engine::temp_check_inputs() {
             switch (event.key.keysym.sym){
                 case SDLK_x:
                     printf("rewind end\n");
+                    game->stop_rewind();
+                    // timeline_stop_rewind();
+                break;
+                case SDLK_z:
+                    printf("backwarp end\n");
                     // timeline_stop_rewind();
                 break;
             }
@@ -124,7 +153,8 @@ void Engine::temp_initialize_gamestate() {
 	// test_pellet = new Pellet({10,10});
 	// auto test_pellet = std::make_shared<Pellet>({10,10});
 	Point pt = {10,10};
-	test_pellet = std::make_shared<Pellet>(pt);
-	game->map.objects.push_back(test_pellet);	
+	test_pellet = std::make_shared<Pellet>(game, pt);
+	game->map.objects.push_back(test_pellet);
 
+  game->time_ticks = 0;
 }

@@ -7,16 +7,17 @@
 //OR define block size from screen size.
 #include "gamestate.hpp"
 
-
-
 #define SCREEN_MARGIN 8
-#define BLOCK_SIZE 16
+//if block size is odd, then it's easier to center things using SDL_gfx
+#define BLOCK_SIZE 17
+
 #define SCREEN_WIDTH (MAX_HOR_BLOCKS * BLOCK_SIZE) + (SCREEN_MARGIN * 2)
 #define SCREEN_HEIGHT (MAX_VER_BLOCKS * BLOCK_SIZE) + (SCREEN_MARGIN * 2)
 
 class SDL_Renderer;
 class Snake;
 class Pellet;
+class Wall;
 
 
 class Display {
@@ -27,6 +28,7 @@ public:
 
 	void draw_snake_object(const Snake* snake, const SDL_Color* color);
 	void draw_pellet_object(const Pellet* pellet);
+	void draw_wall_object(const Wall* wall);
 
 	SDL_Window *window;
 	SDL_Renderer *renderer;

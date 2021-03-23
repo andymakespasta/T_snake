@@ -7,6 +7,7 @@
 #include <array>
 #include <memory>
 #include <functional>
+#include <deque>
 // #include <compare>
 
 #define GAMESTATE_MANAGERS 0
@@ -16,7 +17,11 @@
 #define MAX_HOR_BLOCKS 40
 #define MAX_VER_BLOCKS 30
 
+// TODO: this is temporary before we have serialization.
+#define HISTORY_FRAMES 300
+
 class Gamestate;
+class Snake;
 
 // common types
 struct Point {
@@ -35,7 +40,15 @@ enum Direction {
 // Base Class for all objects
 class InGameObject {
  public:
-  // InGameObject();
+
+  // update object by 1 tick.
+  virtual int tick() {};
+  // exposed for easier object interaction
+  virtual std::vector<Point> get_coords() {return {};};
+  // used for history
+  virtual std::shared_ptr<InGameObject> copy() {return NULL;};
+
+
   enum ObjectType {
     EMPTY,
     SNAKE,
@@ -43,10 +56,8 @@ class InGameObject {
     WALL,
     SNAKE_ECHO,
   } type;
-
-  // update object by 1 tick.
-  virtual void tick() {};
-  virtual std::vector<Point> get_coords() {return {}; };
+  //maybe make this weak_ptr
+  Gamestate* _game; // pointer to top level gamestate
 };
 
 class Manager {
@@ -67,10 +78,10 @@ public:
 // provides easy to use API to get information on the map
 class MapState {
 public:
+  // MapState();
   // list of pointers to static game objects.
   // list of pointers to moving game objects.
   // TODO: check if vector of pointers is best type for this
-
   // std::vector<InGameObject*> objects;
   std::list<std::shared_ptr<InGameObject>> objects;
 
@@ -82,20 +93,44 @@ public:
   // deletes an object by removing all shared_ptr references 
   void delete_object(std::shared_ptr<InGameObject>);
 
+  std::shared_ptr<Snake> get_snake_obj();
   std::shared_ptr<InGameObject> get_object_at_coord(Point);
   InGameObject::ObjectType get_object_type_at_coord(Point);
 };
 
+class Snapshot {
+public:
+  std::list<std::shared_ptr<InGameObject>> objects;
+  int time_ticks;
+};
 
 
 class Gamestate {
   // TimelineManager
   // PelletManager
   // History
+  
 public:
+
+  enum state {
+    NORMAL,       // time marches forwards
+    REWINDING,    // timeline is undone, No control, backwards movement.
+    TIMEJUMPING,  // we're traveling back in time. No movement, doesn't affect timeline
+  } game_time_state;
+  
+
+void take_snapshot();
+void load_snapshot(int time) ;
+void load_snapshot(Snapshot snapshot) ;
+void start_rewind();
+void stop_rewind();
+
+//TODO: this belongs in some manager
+
+  std::deque<Snapshot> history;
+  int time_ticks;
   MapState map;
   std::array<Manager* ,GAMESTATE_MANAGERS> managers;
 };
-
 
 #endif //GAMESTATE_HPP

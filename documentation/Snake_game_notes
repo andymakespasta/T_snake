@@ -8,13 +8,13 @@ Snake collisions object interactions.
 		When your snake head encounters them, they disappear, and some effect is applied. These cannot move into other objects.
 		usually displayed with yellow, and are smaller than the grid.
 
-	Other objects are guidelines
+	Other objects are guidelines, used to indicate portals / switches
 		They have no effect in-game.
 		usually displayed with low values (grey) or with scanning animation
 
 	Other objects are projectiles
 		When your snake (or another object) encounters them in any way (your head moving into them, or the object moving into your body), their effects are applied.
-		usually displayed with red, or with scrambled data animation.
+		usually displayed with red/white, or with scrambled data animation.
 
 	Other objects have a hardness rating + fixed/unfixed.
 		When two objects with hardness collide, lower hardness object is damaged.
@@ -24,7 +24,14 @@ Snake collisions object interactions.
 		The snake body is a fixed object. When enemies hit it, they bounce back.
 		Walls are fixed objects with high hardness.
 
-	Hardening / (encryption): when things collide, lower hardness object is damaged
+	Hardening : when things collide, lower hardness object is damaged
+		There are only 5 levels of hardness: 
+		0/none: snake can eat directly
+		1/thin white border: same hardness as snake
+		2/thick white border: same hardness as snake + smash
+		3/thick white border+light aliased infill: can be deleveled, then smashed
+		4/completely white: impossible to break.
+
 		displayed via texture + outline:
 			hardness - modifier: lighter, and missing pixels.
 			hardness + modifier: glowing outline (blueish). Multiple layers cycling colors.

@@ -13,12 +13,14 @@ public:
 		  int length = 5, 
 		  int mtpm = 7000);
 
-	void tick();
+	int tick();
 	void move();
 	void queued_turn(enum Direction direction);
 	//void draw()??
 	//temp solution 
 	std::vector<Point> get_coords();
+
+	std::shared_ptr<InGameObject> copy();
 
 	void hit_pellet();
 
@@ -38,7 +40,7 @@ public:
 	// the front of the deque is the head, the back is the tail
 	std::deque<Point> q_body;
 	
-	Gamestate* _game;
+	// Gamestate* _game;
 	//TODO: compare speed with vectors.
 	// std::vector<Point> v_body;
 };

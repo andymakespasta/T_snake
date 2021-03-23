@@ -5,6 +5,11 @@ NAME=T_snake
 
 export SOURCES = $(abspath $(wildcard *.cpp))
 export INCLUDES = $(abspath $(wildcard *.hpp))
+export THIRD_PARTY_INCLUDES = -I../output/SDL2_gfx/include/SDL2/ -I/usr/include/SDL2/
+export THIRD_PARTY_LIBRARIES = -L../output/SDL2_gfx/lib -lSDL2_gfx
+# export LD_RUN_PATH= $LD_RUN_PATH:
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/programming/T_snake/output/SDL2_gfx/lib
+
 ASSETS = 
 
 all: web linux
@@ -66,7 +71,10 @@ linux-run: linux
 
 output/linux/$(NAME): $(SOURCES) $(INCLUDES)
 	@mkdir -p ./output/linux
-	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o output/linux/$(NAME)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(THIRD_PARTY_INCLUDES) $(THIRD_PARTY_LIBRARIES) \
+	$(SOURCES) \
+	-Wall -Wextra -g \
+	-o output/linux/$(NAME)
 
 
 ##############################

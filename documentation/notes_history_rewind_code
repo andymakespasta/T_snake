@@ -1,0 +1,27 @@
+from braid Jonathan Blod GDC talk:
+	Serialize gamestate -> non-fragmented memory and compressible
+	Objects in game are categorized and handled differently:
+		
+		fixed objects (level geometry) only need one copy.
+
+	    particles (non-gameplay affecting) can be reworked to be generated via closed form drawParticle(params, time, seed). So that particles can go forwards or backwards in time using the same calculations, and take no storage (apart from initial params, which are probably compressible as "50x particles with param, seed");
+
+	Tricks to saving down on memory cost:
+		lots of objects have unchanged parameters -> save diffs. Reconstructing objects is now loading base frame, then overlaying diff.
+		When a new object is created, it will be in the baseframe, but "hidden"
+
+		Lots of objects are using default parameters -> save objects only in differences from default. (this will be dependent on what type of game?). Loading base frame, when loading an object, construct default object, then overlay saved differences.
+
+	Tricks to speed up things:
+		Frame cache: Several ticks/frames are live, and can be sampled directly without needing to serialize/deserialize.
+
+
+On general C++ serialization / deserialization:
+https://accu.org/journals/overload/24/136/ignatchenko_2317/
+
+polymorphic serialization + saving the derived type as a separate field.
+
+
+
+
+Serialize / deserialize interfaces.

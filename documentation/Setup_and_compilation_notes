@@ -8,6 +8,14 @@ SDL2 SDL2-ttf
     fatal error: SDL2/SDL.h: No such file or directory
     fatal error: SDL2/SDL_ttf.h: No such file or directory   
 
+SDL2_gfx
+  ./autogen.sh
+  ./configure
+  ./configure --prefix=$(pwd)/../../output/SDL2_gfx
+  make install
+
+
+
 Web version also requires:
 
 Emscripten
@@ -34,3 +42,7 @@ clang version 12.0.0 (/b/s/w/ir/cache/git/chromium.googlesource.com-external-git
 Target: x86_64-unknown-linux-gnu
 
 gcc version 6.3.0 20170516 (Debian 6.3.0-18+deb9u1) 
+
+
+runtime:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/programming/T_snake/output/SDL2_gfx/lib

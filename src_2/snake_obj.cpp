@@ -19,12 +19,14 @@ Snake::Snake(Gamestate* game, Point head, Direction dir, int len, int mtpm) {
 	q_body.push_front(head);
 }
 
-void Snake::tick() {
+int Snake::tick() {
 	milli_ticks_till_move -= 1000;
 	if (milli_ticks_till_move <= 0){
 		milli_ticks_till_move += milli_ticks_per_move;
 		move();
+		return 1;
 	}
+	return 0;
 }
 
 void Snake::move() {
@@ -128,4 +130,20 @@ void Snake::hit_pellet() {
 	//update self/score based on pellet
 	//delete pellet
 
+}
+
+std::shared_ptr<InGameObject> Snake::copy(){
+	auto copy_snake = std::make_shared<Snake>( _game );
+	copy_snake->last_move = last_move;
+	copy_snake->direction = direction;
+	copy_snake->queued_direction = queued_direction;
+	copy_snake->milli_ticks_per_move = milli_ticks_per_move;
+	copy_snake->milli_ticks_till_move = milli_ticks_till_move;
+	copy_snake->length = length;
+	copy_snake->q_body.clear();
+	for (auto it = q_body.begin(); it!=q_body.end(); ++it){
+		copy_snake->q_body.push_front(*it);
+	}
+
+	return std::dynamic_pointer_cast<InGameObject>(copy_snake);
 }
